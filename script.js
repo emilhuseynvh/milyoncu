@@ -23,7 +23,7 @@ function call() {
     random = rnd(0, api.sual.length - 1);
     sual.innerHTML = api.sual[random].s;
     api.sual[random].c.forEach((element, index) => {
-        kod += `<li onclick="ansClick(${index})" id="a${index}" style="margin-bottom: 20px; background-color: blue; padding: 8px 0; border-radius: 20px; box-shadow: 0 0 10px #333; cursor: pointer">${element}</li>`;
+        kod += `<li onclick="ansClick(${index})" id="a${index}" class="answer-option" style="margin-bottom: 20px; background-color: blue; padding: 8px 0; border-radius: 20px; box-shadow: 0 0 10px #333; cursor: pointer">${element}</li>`;
     });
     if (x <= 10) number.innerHTML = x + '/10';
     else{
@@ -37,6 +37,9 @@ function call() {
 
 function ansClick(index) {
     const secilen = document.querySelector(`#a${index}`);
+    if (secilen.classList.contains('clicked')) return;
+
+    secilen.classList.add('clicked');
     if (api.sual[random].d == index) {
         answer[1].push('1');
         secilen.style.backgroundColor = 'green';
@@ -52,5 +55,3 @@ function ansClick(index) {
 function rnd(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
